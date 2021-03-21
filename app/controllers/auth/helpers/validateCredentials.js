@@ -8,6 +8,8 @@ export const validateCredentials = async (email, password) => {
 
   if (!user?.blocked) {
     if (await user?.comparePassword(password)) {
+      delete user._doc?.password;
+
       return user;
     }
   } else {

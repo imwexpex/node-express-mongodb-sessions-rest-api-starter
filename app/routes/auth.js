@@ -23,6 +23,6 @@ router.get(
   controller.logout,
 );
 
-router.get('/refresh', trimRequest.all, validate.refresh, controller.refresh);
+router.post('/refresh', trimRequest.all, validate.refresh, controller.refresh);
 
 module.exports = router;

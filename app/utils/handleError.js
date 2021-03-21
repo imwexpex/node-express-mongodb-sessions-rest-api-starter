@@ -11,13 +11,6 @@ const handleError = (res = {}, err = {}) => {
 
   const status = (Number(err.code) > 500 ? 500 : err.code) || 500;
 
-  // Sends error to user
-  /*res.status().json({
-    errors: {
-      msg: err.message,
-    },
-  });*/
-
   res.status(status).send(err);
 };
 

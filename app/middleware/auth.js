@@ -66,7 +66,7 @@ const refreshSession = async (req) => {
   });
 
   if (
-    session?.refreshToken === refreshToken &&
+    session && session?.refreshToken === refreshToken &&
     !isAfter(new Date(), new Date(session?.refreshTokenExpireAt))
   ) {
     await session.delete();
