@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-module.exports = () => {
-  const connect = () => {
+export const initMongo = async () => {
+  const connect = async () => {
     mongoose.Promise = global.Promise;
 
     const options = {
@@ -13,31 +13,32 @@ module.exports = () => {
       useUnifiedTopology: true,
     };
 
-    mongoose.connect(
-      `mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`,
-      options,
-      (err) => {
-        let dbStatus = '';
-        if (err) {
-          dbStatus = `*    Error connecting to DB: ${err}\n****************************\n`;
-        } else {
-          dbStatus = `*    DB Connection: OK\n****************************\n`;
-        }
-        if (process.env.NODE_ENV !== 'test') {
-          console.log('****************************');
-          console.log('*    Starting Server');
-          console.log(`*    Port: ${process.env.PORT || 3000}`);
-          console.log(`*    MODE: ${process.env.MODE}`);
-          console.log(`*    Database: MongoDB`);
-          console.log(dbStatus);
-        }
-      },
-    );
+    try {
+      await mongoose.connect(
+        `mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`,
+        options,
+      );
+
+      console.log('****************************');
+      console.log('*    Starting Server');
+      console.log(`*    Port: ${process.env.PORT || 3000}`);
+      console.log(`*    MODE: ${process.env.MODE}`);
+      console.log(`*    Database: MongoDB`);
+      console.log(`*    DB Connection: OK\n****************************\n`);
+
+      //mongoose.set('debug', true);
+    } catch (e) {
+      console.log(`*    DB Connection: ERROR\n****************************\n`);
+      console.error(e);
+
+      await connect();
+    }
+
     mongoose.set('useCreateIndex', true);
     mongoose.set('useFindAndModify', false);
   };
-  connect();
+  await connect();
 
-  mongoose.connection.on('error', console.log);
+  mongoose.connection.on('error', console.error);
   mongoose.connection.on('disconnected', connect);
 };
