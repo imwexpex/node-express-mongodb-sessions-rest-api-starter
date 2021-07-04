@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:14.12.0-alpine as builder
 
 ENV APP_ROOT /opt/app
 ENV PORT 3000
@@ -9,6 +9,10 @@ ADD . .
 RUN chmod +x /opt/app/app/app.js
 EXPOSE $PORT
 
+RUN apk add git
+
 RUN yarn global add pm2
-RUN yarn
-CMD ["pm2-runtime", "/opt/app/app/app.js", "--interpreter", "/opt/app/node_modules/.bin/babel-node"]
+RUN yarn install --production
+RUN yarn build
+
+CMD ["pm2-runtime", "/opt/app/build/app.js"]

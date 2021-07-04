@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon --exec babel-node app/app.js",
-    "prod": "babel-node app/app.js",
-    "build": "babel -d ./build ./app -s"
+    "clean": "rm -rf ./build && mkdir ./build",
+    "build": "yarn clean && babel -d ./build ./app -s"
   },
   "dependencies": {
     "@babel/cli": "^7.12.10",
@@ -35,10 +35,10 @@
     "node-schedule": "^2.0.0",
     "nodemon": "^2.0.7",
     "rand-token": "^1.0.1",
-    "trim-request": "^1.0.6"
+    "trim-request": "^1.0.6",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0",
     "prettier": "^2.2.1",
     "prettier-eslint": "^12.0.0",
     "tslib": "^2.1.0"
