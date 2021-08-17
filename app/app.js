@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const {initMongo} = require('./config/mongo');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 
@@ -28,6 +29,8 @@ const app = express();
   );
 
   app.use(helmet());
+
+  app.use(cors());
 
   app.use('/', require('./routes'));
 
