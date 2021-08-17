@@ -6,7 +6,7 @@ exports.get = async (req, res) => {
   try {
     res.json(req.user);
   } catch (e) {
-    (e);
+    console.error(e);
     utils.handleError(res, e);
   }
 };
@@ -21,7 +21,7 @@ exports.update = async (req, res) => {
 
     res.json(user);
   } catch (e) {
-    (e);
+    console.error(e);
     utils.handleError(res, e);
   }
 };
