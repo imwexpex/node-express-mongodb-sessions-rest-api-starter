@@ -1,11 +1,6 @@
 import {User} from '@models';
 import {buildErrObject} from '@utils';
 
-/**
- * Checks User model if user with an specific email exists
- * @param {string} email - user email
- */
-
 const emailExists = (email = '') => {
   return new Promise((resolve, reject) => {
     User.findOne(

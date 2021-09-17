@@ -1,10 +1,11 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
 
-const trimRequest = require('trim-request');
-const validate = require('../controllers/profile/profile.validate');
-const controller = require('../controllers/profile/profile');
+import trimRequest from 'trim-request';
+import {default as validate} from '../controllers/profile/profile.validate';
+import {default as controller} from '../controllers/profile/profile';
 import {checkSession} from '@middleware/auth';
+
+const router = express.Router();
 
 router.get('/', checkSession, trimRequest.all, validate.get, controller.get);
 

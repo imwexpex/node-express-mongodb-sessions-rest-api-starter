@@ -1,12 +1,13 @@
 import 'source-map-support/register';
-require('dotenv').config();
+import 'dotenv/config';
 
-const express = require('express');
-const morgan = require('morgan');
-const helmet = require('helmet');
-const {initMongo} = require('./config/mongo');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+import express from 'express';
+import morgan from 'morgan';
+import helmet from 'helmet';
+import {initMongo} from './config/mongo';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import routes from './routes';
 
 const app = express();
 
@@ -33,7 +34,7 @@ const app = express();
 
   app.use(cors());
 
-  app.use('/', require('./routes'));
+  app.use('/', routes);
 
   app.use(function (req, res) {
     res.sendStatus(404);

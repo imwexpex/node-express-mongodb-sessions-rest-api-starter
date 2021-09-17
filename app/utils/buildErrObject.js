@@ -3,11 +3,9 @@
  * @param {number} code - error code
  * @param {string} message - error text
  */
-const buildErrObject = (code = '', message = '') => {
+export const buildErrObject = (code = '', message = '') => {
   return {
     code,
-    message
-  }
-}
-
-module.exports = { buildErrObject }
+    message,
+  };
+};

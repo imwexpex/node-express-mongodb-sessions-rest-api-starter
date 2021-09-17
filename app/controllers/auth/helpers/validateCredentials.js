@@ -1,4 +1,4 @@
-import utils from '@utils';
+import {buildErrObject} from '@utils';
 import {User} from '@models';
 
 export const validateCredentials = async (email, password) => {
@@ -13,8 +13,8 @@ export const validateCredentials = async (email, password) => {
       return user;
     }
   } else {
-    throw utils.buildErrObject(403, 'USER_BLOCKED');
+    throw buildErrObject(403, 'USER_BLOCKED');
   }
 
-  throw utils.buildErrObject(401, 'INCORRECT_DATA');
+  throw buildErrObject(401, 'INCORRECT_DATA');
 };

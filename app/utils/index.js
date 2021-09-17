@@ -1,13 +1,4 @@
-const {buildErrObject} = require('./buildErrObject');
-const {buildSuccObject} = require('./buildSuccObject');
-const {handleError} = require('./handleError');
-const {itemNotFound} = require('./itemNotFound');
-const {validateResult} = require('./validateResult');
+export {buildErrObject} from './buildErrObject';
+export {handleError} from './handleError';
+export {validateResult} from './validateResult';
 
-module.exports = {
-  buildErrObject,
-  buildSuccObject,
-  handleError,
-  itemNotFound,
-  validateResult,
-};

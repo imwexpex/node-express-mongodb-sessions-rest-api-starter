@@ -1,6 +1,6 @@
-import {Session, User} from '@models';
+import {Session} from '@models';
 import user from '@models/user';
-import utils from '@utils';
+import {buildErrObject} from '@utils';
 import isAfter from 'date-fns/isAfter';
 import addMinutes from 'date-fns/addMinutes';
 import {matchedData} from 'express-validator';
@@ -55,7 +55,7 @@ const deleteSession = async (req) => {
     return;
   }
 
-  throw utils.buildErrObject(401, 'Unauthorized');
+  throw buildErrObject(401, 'Unauthorized');
 };
 
 const refreshSession = async (req) => {
@@ -66,7 +66,8 @@ const refreshSession = async (req) => {
   });
 
   if (
-    session && session?.refreshToken === refreshToken &&
+    session &&
+    session?.refreshToken === refreshToken &&
     !isAfter(new Date(), new Date(session?.refreshTokenExpireAt))
   ) {
     await session.delete();
@@ -74,7 +75,7 @@ const refreshSession = async (req) => {
     return await createSession(req, session.user._id);
   }
 
-  throw utils.buildErrObject(401, 'Unauthorized');
+  throw buildErrObject(401, 'Unauthorized');
 };
 
 const checkSession = async (req, res, next) => {
@@ -88,7 +89,7 @@ const checkSession = async (req, res, next) => {
 
       next();
     } else {
-      return res.status(403).send(utils.buildErrObject(403, 'USER_BLOCKED'));
+      return res.status(403).send(buildErrObject(403, 'USER_BLOCKED'));
     }
   } else {
     return res.status(401).send('Unauthorized');

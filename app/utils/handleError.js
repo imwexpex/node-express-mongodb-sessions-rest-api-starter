@@ -3,7 +3,7 @@
  * @param {Object} res - response object
  * @param {Object} err - error object
  */
-const handleError = (res = {}, err = {}) => {
+export const handleError = (res = {}, err = {}) => {
   // Prints error in console
   if (process.env.MODE === 'dev') {
     console.error(err);
@@ -13,5 +13,3 @@ const handleError = (res = {}, err = {}) => {
 
   res.status(status).send(err);
 };
-
-module.exports = {handleError};

@@ -1,10 +1,12 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
 
-const trimRequest = require('trim-request');
-const validate = require('../controllers/auth/auth.validate');
-const controller = require('../controllers/auth/auth');
-const {checkSession} = require('@middleware/auth');
+import trimRequest from 'trim-request';
+import {default as validate} from '../controllers/auth/auth.validate';
+import {default as controller} from '../controllers/auth/auth';
+
+import {checkSession} from '@middleware/auth';
+
+const router = express.Router();
 
 router.post(
   '/register',

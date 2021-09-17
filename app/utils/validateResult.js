@@ -8,7 +8,7 @@ const {buildErrObject} = require('./buildErrObject');
  * @param {Object} res - response object
  * @param {Object} next - next object
  */
-const validateResult = (req, res, next) => {
+export const validateResult = (req, res, next) => {
   try {
     validationResult(req).throw();
     if (req.body.email) {
@@ -20,4 +20,3 @@ const validateResult = (req, res, next) => {
   }
 };
 
-module.exports = {validateResult};

@@ -1,7 +1,7 @@
-import utils from '@utils';
+import {validateResult} from '@utils';
 import {body} from 'express-validator';
 
-exports.register = [
+const register = [
   body('email').isEmail().withMessage('EMAIL_REQUIRED'),
   body('password')
     .isString()
@@ -12,30 +12,27 @@ exports.register = [
     .withMessage('PASSWORD_NOT_MIN_LENGTH'),
   body('name').isString().withMessage('NAME_REQUIRED'),
 
-  (req, res, next) => {
-    utils.validateResult(req, res, next);
-  },
+  validateResult,
 ];
 
-exports.login = [
+const login = [
   body('email').isEmail().withMessage('EMAIL_REQUIRED'),
   body('password').isString().withMessage('PASSWORD_REQUIRED'),
 
-  (req, res, next) => {
-    utils.validateResult(req, res, next);
-  },
+  validateResult,
 ];
 
-exports.logout = [
-  (req, res, next) => {
-    utils.validateResult(req, res, next);
-  },
-];
+const logout = [validateResult];
 
-exports.refresh = [
+const refresh = [
   body('refreshToken').isString().withMessage('REFRESH_TOKEN_REQUIRED'),
 
-  (req, res, next) => {
-    utils.validateResult(req, res, next);
-  },
+  validateResult,
 ];
+
+export default {
+  register,
+  login,
+  logout,
+  refresh,
+};

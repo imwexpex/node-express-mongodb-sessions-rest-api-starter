@@ -1,4 +1,4 @@
-import utils from '@utils';
+import {handleError, buildErrObject} from '@utils';
 
 const validateSecret = (secret, next) => {
   if (secret === 'dxYgrrT9rcQPgTCaH9nfc7RuDjzbhbW8') {
@@ -12,6 +12,6 @@ exports.use = (req, res, next) => {
   try {
     validateSecret(req.get('Client-Secret'), next);
   } catch (err) {
-    return utils.handleError(res, utils.buildErrObject(401, 'Unauthorized'));
+    return handleError(res, buildErrObject(401, 'Unauthorized'));
   }
 };

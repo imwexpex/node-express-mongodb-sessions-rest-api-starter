@@ -1,17 +1,17 @@
-import utils from '@utils';
+import {handleError} from '@utils';
 import {matchedData} from 'express-validator';
 import {User} from '@models';
 
-exports.get = async (req, res) => {
+const get = async (req, res) => {
   try {
     res.json(req.user);
   } catch (e) {
     console.error(e);
-    utils.handleError(res, e);
+    handleError(res, e);
   }
 };
 
-exports.update = async (req, res) => {
+const update = async (req, res) => {
   try {
     const matchedReq = matchedData(req);
 
@@ -22,6 +22,11 @@ exports.update = async (req, res) => {
     res.json(user);
   } catch (e) {
     console.error(e);
-    utils.handleError(res, e);
+    handleError(res, e);
   }
+};
+
+export default {
+  get,
+  update,
 };
