@@ -12,7 +12,7 @@ EXPOSE $PORT
 RUN apk add git
 
 RUN yarn global add pm2
-RUN yarn install --production
+RUN yarn install
 RUN yarn build
 
 CMD ["pm2-runtime", "/opt/app/build/app.js"]
